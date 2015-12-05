@@ -7,6 +7,7 @@
     <class>info.iniko.models.Category</class>
     <class>info.iniko.models.Order</class>
     <class>info.iniko.models.Photo</class>
+    <class>info.iniko.MvcConfig</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/petstore?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value=""/>
