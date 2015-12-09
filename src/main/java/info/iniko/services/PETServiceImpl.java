@@ -6,7 +6,7 @@
 package info.iniko.services;
 
 import info.iniko.models.Pet;
-import java.util.List;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,7 +25,7 @@ public class PETServiceImpl implements PETService{
     public PETServiceImpl(PetRepository petRepository){
         repository = petRepository;
     }
-    @Override
+    @Override 
     public void delete(Long id) {
         repository.delete(id);
     }

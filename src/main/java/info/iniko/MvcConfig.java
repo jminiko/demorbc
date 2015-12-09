@@ -13,30 +13,30 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
     @Bean
-	public TemplateResolver templateResolver() {
-		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
-		templateResolver.setPrefix("/WEB-INF/views/");
-		templateResolver.setSuffix(".html");
-		templateResolver.setTemplateMode("HTML5");
-		templateResolver.setCacheable(false);
-		return templateResolver;
-	}
+    public TemplateResolver templateResolver() {
+            ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
+            templateResolver.setPrefix("/WEB-INF/views/");
+            templateResolver.setSuffix(".html");
+            templateResolver.setTemplateMode("HTML5");
+            templateResolver.setCacheable(false);
+            return templateResolver;
+    }
 
-	@Bean
-	public SpringTemplateEngine templateEngine() {
-		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver());
-                
-		return templateEngine;
-	}
+    @Bean
+    public SpringTemplateEngine templateEngine() {
+            SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+            templateEngine.setTemplateResolver(templateResolver());
 
-	@Bean
-	public ViewResolver viewResolver() {
-		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-		viewResolver.setTemplateEngine(templateEngine());
-		viewResolver.setOrder(1);
-		return viewResolver;
-	}
+            return templateEngine;
+    }
+
+    @Bean
+    public ViewResolver viewResolver() {
+            ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+            viewResolver.setTemplateEngine(templateEngine());
+            viewResolver.setOrder(1);
+            return viewResolver;
+    }
 
 	
     @Override
