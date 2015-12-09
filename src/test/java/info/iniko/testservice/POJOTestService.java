@@ -5,9 +5,9 @@
  */
 package info.iniko.testservice;
 
+import info.iniko.models.Pet;
 import info.iniko.services.PETServiceImpl;
 import info.iniko.services.PetRepository;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,8 +34,8 @@ public class POJOTestService {
     
     @Test
     public void testFindAll(){
-        List collection = service.findAll();
-        System.out.println(collection);
-        Assert.notNull(collection);
+        Pet p = service.findById(1L);
+        System.out.println(p);
+        Assert.isNull(p);
     }
 }

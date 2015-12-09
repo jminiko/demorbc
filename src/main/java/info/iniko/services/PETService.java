@@ -6,7 +6,7 @@
 package info.iniko.services;
 
 import info.iniko.models.Pet;
-import java.util.List;
+import org.springframework.security.access.annotation.Secured;
 
 /**
  *
@@ -14,8 +14,10 @@ import java.util.List;
  */
 
 public interface PETService {
-    
+    @Secured({"ROLEA","ROLEB"})
     public Pet findById(Long id);
+    @Secured({"ROLEB"})
     public void delete(Long id);
+    @Secured({"ROLEB"})
     public Pet save(Pet pet);
 }

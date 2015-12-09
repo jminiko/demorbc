@@ -35,6 +35,11 @@ public class PetController {
         pojoService = null;
     }
     
+    @RequestMapping(value = "/pet/{petId}", method = RequestMethod.GET)
+    public void findPet(@PathVariable String petId) {
+        pojoService.findById(Long.valueOf(petId));
+    }
+    
     @RequestMapping(value = "/pet/{petId}", method = RequestMethod.DELETE)
     public void deletePet(@PathVariable String petId) {
         pojoService.delete(Long.valueOf(petId));
