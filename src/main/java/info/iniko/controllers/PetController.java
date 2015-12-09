@@ -37,7 +37,13 @@ public class PetController {
     
     @RequestMapping(value = "/pet/{petId}", method = RequestMethod.GET)
     public void findPet(@PathVariable String petId) {
-        pojoService.findById(Long.valueOf(petId));
+        try{
+            Pet p = pojoService.findById(Long.valueOf(petId));
+            if(p==null)
+                throw new PetNotFoundException(petId);
+        }catch(Exception ex){
+            throw new PetNotFoundException(petId);
+        }
     }
     
     @RequestMapping(value = "/pet/{petId}", method = RequestMethod.DELETE)
@@ -45,15 +51,14 @@ public class PetController {
         pojoService.delete(Long.valueOf(petId));
     }
     @RequestMapping(value = "/pet/{petId}", method = RequestMethod.POST)
-    public Pet createPet(@PathVariable String petId,
-                         @RequestBody @Valid final Pet pet) {
+    public Pet createPet( @RequestBody @Valid final Pet pet) {
         Pet p = null;
         try{
             p = pojoService.save(pet);
             if(p==null)
-                throw new PetNotFoundException(petId);
+                throw new PetSaveFoundException();
         }catch(Exception ex){
-            throw new PetNotFoundException(petId);
+            throw new PetSaveFoundException();
         }
         return p;
     }
@@ -61,8 +66,16 @@ public class PetController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     class PetNotFoundException extends RuntimeException {
 
-	public PetNotFoundException(String petId) {
-		super("could not find pet '" + petId + "'.");
+	public PetNotFoundException(String id) {
+		super("could not load pet with id: "+id+" .");
 	}
-}
+    }
+    
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    class PetSaveFoundException extends RuntimeException {
+
+	public PetSaveFoundException() {
+		super("could not save pet.");
+	}
+    }
 }
